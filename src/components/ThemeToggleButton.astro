@@ -1,0 +1,99 @@
+---
+// ThemeToggleButton.astro
+const themes = [
+  'light', 
+  'dark', 
+  'halloween', 
+  'forest', 
+  'cupcake', 
+  'synthwave', 
+  'retro', 
+  'cyberpunk', 
+  'valentine', 
+  'corporate',
+  'emerald',
+  'pastel',
+  'wireframe',
+  'black',
+  'luxury',
+  'dracula'
+];
+---
+
+<div class="w-48">
+  <div 
+    id="theme-toggle-btn"
+    role="button" 
+    aria-label="Change website theme"
+    class="btn btn-ghost w-full flex justify-between items-center rounded-btn"
+  >
+    <span id="current-theme-display" class="flex-grow text-left">Theme</span>
+    <svg 
+      xmlns="http://www.w3.org/2000/svg" 
+      width="24" 
+      height="24" 
+      viewBox="0 0 24 24" 
+      fill="none" 
+      stroke="currentColor" 
+      stroke-width="2" 
+      class="w-5 h-5"
+    >
+      <circle cx="12" cy="12" r="5" fill="currentColor" />
+      <line x1="12" y1="1" x2="12" y2="3" stroke="currentColor" />
+      <line x1="12" y1="21" x2="12" y2="23" stroke="currentColor" />
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" stroke="currentColor" />
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" stroke="currentColor" />
+      <line x1="1" y1="12" x2="3" y2="12" stroke="currentColor" />
+      <line x1="21" y1="12" x2="23" y2="12" stroke="currentColor" />
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" stroke="currentColor" />
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" stroke="currentColor" />
+    </svg>
+  </div>
+</div>
+
+<script is:inline define:vars={{themes}}>
+  const getTheme = () => {
+    if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+      return localStorage.getItem('theme');
+    }
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      return 'dark';
+    }
+    return 'light';
+  };
+
+  const setTheme = (theme) => {
+    try {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      
+      // Update display
+      const currentThemeDisplay = document.getElementById('current-theme-display');
+      if (currentThemeDisplay) {
+        currentThemeDisplay.textContent = theme.charAt(0).toUpperCase() + theme.slice(1);
+      }
+    } catch (error) {
+      console.error('Theme setting failed:', error);
+    }
+  };
+
+  // Use Astro's define:vars to pass themes directly
+  const init = () => {
+    const initialTheme = getTheme();
+    setTheme(initialTheme);
+
+    const themeToggleBtn = document.getElementById('theme-toggle-btn');
+    let currentThemeIndex = themes.indexOf(initialTheme);
+    
+    themeToggleBtn.addEventListener('click', () => {
+      // Cycle to next theme
+      currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+      const newTheme = themes[currentThemeIndex];
+      setTheme(newTheme);
+    });
+  };
+
+  // Use DOMContentLoaded and view transition events
+  document.addEventListener('DOMContentLoaded', init);
+  document.addEventListener('astro:page-load', init);
+</script>
