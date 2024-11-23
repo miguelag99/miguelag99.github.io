@@ -1,0 +1,92 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HorizontalCard from "../components/HorizontalCard.astro";
+
+import { subjects } from '../content/teaching';
+
+---
+
+<BaseLayout title="Teaching" sideBarActiveItemID="teaching">
+  <div class="pb-12 mt-5">
+    <div class="text-5xl font-bold mb-8">Teaching Experience</div>
+    
+    <!-- Teaching Philosophy -->
+    <div class="bg-base-200 rounded-xl p-6 mb-8 shadow-lg">
+      <h2 class="text-2xl font-bold mb-4">Teaching Philosophy</h2>
+      <p class="text-lg">
+        As an educator in the field of AI and Computer Vision, I believe in combining theoretical foundations with hands-on practical experience. My teaching approach emphasizes real-world applications, interactive learning, and fostering critical thinking skills in students.
+      </p>
+    </div>
+
+    <!-- Subject Areas -->
+    {subjects.map((subject) => (
+      <div class="bg-base-200 rounded-xl p-6 mb-8 shadow-lg">
+        <h2 class="text-2xl font-bold mb-3">{subject.area}</h2>
+        <p class="text-base-content/80 mb-6">{subject.description}</p>
+        
+        <div class="space-y-8">
+          {subject.courses.map((course) => (
+            <div class="border-b border-base-300 last:border-b-0 pb-6">
+              <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                <div>
+                  <h3 class="text-xl font-bold">{course.name}</h3>
+                  <p class="text-sm text-base-content/70">{course.period}</p>
+                </div>
+                <div class="flex gap-4 mt-2 md:mt-0">
+                  <span class="badge badge-accent">{course.level}</span>
+                  <span class="badge badge-primary">{course.role}</span>
+                </div>
+              </div>
+              
+              <p class="mb-4 text-base-content/80">
+                {course.description}
+              </p>
+              
+              <div class="pl-4 border-l-2 border-accent">
+                <h4 class="font-semibold mb-2">Course Topics:</h4>
+                <ul class="list-disc list-inside space-y-1">
+                  {course.topics.map((topic) => (
+                    <li class="text-base-content/70">{topic}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    ))}
+
+    <!-- Additional Teaching Activities -->
+    <div class="bg-base-200 rounded-xl p-6 shadow-lg">
+      <h2 class="text-2xl font-bold mb-6">Additional Teaching Activities</h2>
+      
+      <div class="space-y-6">
+        <div class="border-l-2 border-accent pl-4">
+          <h3 class="text-lg font-semibold mb-2">Student Mentoring</h3>
+          <p class="text-base-content/80">
+            Provided guidance and mentorship to undergraduate and graduate students on research projects related to autonomous driving and computer vision. Supervised several final year projects and master's theses.
+          </p>
+        </div>
+        
+        <div class="border-l-2 border-accent pl-4">
+          <h3 class="text-lg font-semibold mb-2">Technical Workshops</h3>
+          <p class="text-base-content/80">
+            Organized and conducted hands-on workshops on:
+            <ul class="list-disc list-inside mt-2 space-y-1">
+              <li class="text-base-content/70">Deep learning frameworks (PyTorch, TensorFlow)</li>
+              <li class="text-base-content/70">Computer vision libraries and tools</li>
+              <li class="text-base-content/70">Autonomous driving simulation environments</li>
+            </ul>
+          </p>
+        </div>
+        
+        <div class="border-l-2 border-accent pl-4">
+          <h3 class="text-lg font-semibold mb-2">Pedagogical Development</h3>
+          <p class="text-base-content/80">
+            Actively participated in teaching development programs and workshops to enhance pedagogical skills and student engagement strategies. Contributed to curriculum development for new courses in autonomous systems.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
