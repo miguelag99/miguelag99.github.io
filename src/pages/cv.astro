@@ -2,57 +2,111 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import TimeLineElement from "../components/cv/TimeLine.astro";
 ---
+<style>
+  /* Add indentation to list items */
+  ul li {
+      padding-left: 1em; /* Adjust the value for more/less indentation */
+      margin-bottom: 0.15cm;
+  }
+  /* Indent for ordered lists */
+  ol li {
+      padding-left: 1em;
+      margin-bottom: 0.15cm;
+  }
+</style>
 
 <BaseLayout title="Resume" sideBarActiveItemID="cv">
   <div class="mb-5">
     <div class="text-3xl w-full font-bold">Profile</div>
   </div>
 
-  <div class="mb-10 text-justify">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-    aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
-    aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-    cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-  </div>
-
   <div class="mb-5">
     <div class="text-3xl w-full font-bold">Education</div>
   </div>
 
-  <div class="time-line-container grid gap-4 mb-10">
+  <!-- Education -->
+  <div class="time-line-container grid gap-5 mb-10">
+
     <TimeLineElement
-      title="Title Name"
-      subtitle="[start year] to [end year] at [Study Center Name], [City], [Country]"
-    />
+      title="Ph.D. in Advanced Electronics and Intelligent Systems"
+      subtitle="Since 2023 at University of Alcalá, Spain"
+      >
+      <ul>
+        <li>Advisors:
+          <a href="https://scholar.google.es/citations?user=uEBILewAAAAJ" style="color: #4f46e5; text-decoration: none;">Luis M. Bergasa </a>
+          and
+          <a href="https://scholar.google.es/citations?user=IktmiSAAAAAJ" style="color: #4f46e5; text-decoration: none;">Rafael Barea </a>         
+        </li>
+        <li>Thesis with title <i><b>Deep Learning for Unified Perception and Prediction in Autonomous Driving.</i></b></li>
+      </ul>
+  </TimeLineElement>
+
     <TimeLineElement
-      title="Title Name"
-      subtitle="[start year] to [end year] at [Study Center Name], [City], [Country]"
-    />
+      title="M.Sc. in Telecommunications Engineering"
+      subtitle="2021 to 2023 at University of Alcalá, Spain"
+      >
+      <ul>
+        <li>Specialization in <b>Space and Defense Technologies.</b></li>
+        <li>Final Thesis with title <i><b>Study of Camera-based Systems for Three-dimensional Object Detection in Autonomous Driving.</i></b></li>
+      </ul>
+    </TimeLineElement>
+
+    <TimeLineElement
+      title="B.Sc. in Electronic and Communications"
+      subtitle="2017 to 2021 at University of Alcalá, Spain"
+      >
+      <ul>
+        <li>Final Thesis with title <i><b>Stereo Vision System Applied to Detection and 
+          Tracking of Objects in Autonomous Driving.</i></b></li>
+      </ul>
+    </TimeLineElement>
+
   </div>
 
   <div class="mb-5">
     <div class="text-3xl w-full font-bold">Experience</div>
   </div>
 
+  <!-- Expirience -->
   <div class="time-line-container mb-10">
+
     <TimeLineElement
-      title="Job Title at Project or Company Name"
-      subtitle="From [Start Date] to [End Date] at [Company], [City], [Country]"
+      title="Predoctoral Researcher"
+      subtitle="Since May 2024 at RobeSafe, Department of Electronics, University de Alcalá."
     >
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
+    <ul>
+      <li>Artificial Intelligence for Perception and Prediction in Autonomous Driving.</li>
+      <li>Teaching assistance and student supervision.</li>
+    </ul> 
     </TimeLineElement>
+
     <TimeLineElement
-      title="Job Title at Project or Company Name"
-      subtitle="From [Start Date] to [End Date] at [Company], [City], [Country]"
+      title="Research Staff"
+      subtitle="From January 2023 to April 2024 at RobeSafe, Department of Electronics, University de Alcalá."
     >
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
+    <ul>
+      <li>3D Perception for Autonomous Vehicles using Stereo Cameras.</li>
+    </ul> 
     </TimeLineElement>
+
     <TimeLineElement
-      title="Job Title at Project or Company Name"
-      subtitle="From [Start Date] to [End Date] at [Company], [City], [Country]"
+      title="Engineering Intern"
+      subtitle="From November 2022 to December 2022 at Escribano Mechanical and Engineering, Alcalá de Henares, Spain"
     >
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
+    <ul>
+      <li>Artificial Intelligence for Road Anomaly Detection in Military Vehicles.</li>
+    </ul> 
     </TimeLineElement>
+
+    <TimeLineElement
+      title="Research Staff"
+      subtitle="From January 2020 to October 2022 at RobeSafe, Department of Electronics, University de Alcalá."
+    >
+    <ul>
+      <li>Camera-based Perception and Creation of Simulation Environments for Autonomous Driving.</li>
+    </ul> 
+    </TimeLineElement>
+
   </div>
 
   <div class="mb-5">
