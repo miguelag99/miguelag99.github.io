@@ -67,7 +67,8 @@ export const theses = {
       student: "Marco Fernández Pérez",
       period: "2024-2025",
       codirector: '<a href="https://scholar.google.es/citations?user=uEBILewAAAAJ" style="color: #4f46e5; text-decoration: none;">Luis M. Bergasa</a>',
-      status: "In Progress",
+      status: "Completed",
+      grade: "9.5/10",
       description: "Multiple neural networks are employed to detect and classify the driver's state and actions in an autonomous system. The challenges of implementing these models on low-power embedded devices are also examined.",
       topics: [
         "Driver Monitoring systems",

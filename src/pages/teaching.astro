@@ -35,7 +35,7 @@ import { subjects, theses } from '../content/teaching';
           
           <div class="border-l-2 border-accent pl-4">
             <h4 class="font-semibold mb-2">Main Topics:</h4>
-            <ul class="list-disc list-inside space-y-1">
+            <ul class="list-disc list-inside space-y-0">
               {subject.topics.map((topic) => (
                 <li class="text-base-content/70">{topic}</li>
               ))}
@@ -70,6 +70,7 @@ import { subjects, theses } from '../content/teaching';
                 <div class="flex-shrink-0">
                   <span class={`badge ${thesis.status === "Completed" ? "badge-success" : "badge-info"}`}>
                     {thesis.status}
+                    {thesis.grade && ` - Grade: ${thesis.grade}`}
                   </span>
                 </div>
               </div>
@@ -77,8 +78,8 @@ import { subjects, theses } from '../content/teaching';
               <p class="mb-4 text-base-content/80">{thesis.description}</p>
               
               <div class="border-l-2 border-accent pl-4">
-                <h5 class="font-semibold mb-2">Key Topics:</h5>
-                <ul class="list-disc list-inside space-y-1">
+                <h5 class="font-semibold mb-2">Main Topics:</h5>
+                <ul class="list-disc list-inside space-y-0">
                   {thesis.topics.map((topic) => (
                     <li class="text-base-content/70">{topic}</li>
                   ))}

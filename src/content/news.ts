@@ -1,5 +1,15 @@
 export const news = [
   {
+    year: 2025,
+    items: [
+      {
+        date: 'July',
+        title: 'Marco Fernández Bachelor\'s Thesis Defense',
+        description: 'Our supervised student Marco presented his Bachelor\'s Thesis with title <strong>Driver monitoring system on low-cost devices using Deep Learning</strong> with a grade of 9.5/10.',
+      }
+    ]
+  },
+  {
     year: 2024,
     items: [
       {
