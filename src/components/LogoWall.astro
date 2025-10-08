@@ -1,0 +1,85 @@
+---
+const technologies = [
+  "git",
+  "bash",
+  "docker",
+  "Visual Studio Code",
+  "python",
+  "pytorch",
+  "Amazon Web Services",
+  "ROS",
+];
+const icon_paths = {
+  "git": "/tool_logos/git.svg",
+  "bash": "https://www.svgrepo.com/show/353478/bash-icon.svg",
+  "docker": "https://www.svgrepo.com/show/373557/docker2.svg",
+  "Visual Studio Code": "https://www.svgrepo.com/show/354522/visual-studio-code.svg",
+  "python": "https://www.svgrepo.com/show/374016/python.svg",
+  "pytorch": "https://www.svgrepo.com/show/354240/pytorch.svg",
+  "Amazon Web Services": "https://www.svgrepo.com/show/376356/aws.svg",
+  "ROS": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Robot_Operating_System_logo.svg/2048px-Robot_Operating_System_logo.svg.png"
+};
+const tool_urls = {
+  "git": "https://git-scm.com/",
+  "bash": "https://www.gnu.org/software/bash/",
+  "docker": "https://www.docker.com/",
+  "Visual Studio Code": "https://code.visualstudio.com/",
+  "python": "https://www.python.org/",
+  "pytorch": "https://pytorch.org/",
+  "Amazon Web Services": "https://aws.amazon.com/",
+  "ROS": "https://www.ros.org/"
+};
+---
+
+<div class="relative overflow-x-hidden py-8">
+  <div
+    class="pointer-events-none absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[var(--background)] to-transparent z-20"
+  >
+  </div>
+  <div
+    class="pointer-events-none absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[var(--background)] to-transparent z-20"
+  >
+  </div>
+
+<div class="flex animate-scroll hover:animate-paused gap-12 md:gap-10 w-max">
+    {
+        [...technologies, ...technologies, ...technologies].map((tech) => (
+            <div class="flex items-center gap-2 group transition-all duration-300">
+                <a href={tool_urls[tech]} target="_blank" rel="noopener noreferrer">
+                    <img
+                        src={icon_paths[tech]}
+                        alt={tech}
+                        class="h-7 w-auto object-contain transition-transform group-hover:scale-110 opacity-100"
+                        width="35"
+                        height="35"
+                        loading="lazy"
+                    />
+                </a>
+                <span class="text-lg font-medium text-[var(--white-icon)]">
+                    {tech.charAt(0).toUpperCase() + tech.slice(1)}
+                </span>
+            </div>
+        ))
+    }
+</div>
+</div>
+
+<style is:global>
+  @keyframes scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  .animate-scroll {
+    animation: scroll 60s linear infinite;
+  }
+
+  @media (min-width: 768px) {
+    .animate-scroll {
+      animation-duration: 50s;
+    }
+  }
+</style>

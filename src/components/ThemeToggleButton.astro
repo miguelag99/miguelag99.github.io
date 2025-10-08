@@ -20,7 +20,7 @@ const themes = [
 ];
 ---
 
-<div class="w-24">
+<div class="w-35">
   <div 
     id="theme-toggle-btn"
     role="button" 
@@ -28,16 +28,8 @@ const themes = [
     class="btn btn-ghost w-full flex justify-between items-center rounded-btn"
   >
     <span id="current-theme-display" class="flex-grow text-left">Theme</span>
-    <svg 
-      xmlns="http://www.w3.org/2000/svg" 
-      width="24" 
-      height="24" 
-      viewBox="0 0 24 24" 
-      fill="none" 
-      stroke="currentColor" 
-      stroke-width="2" 
-      class="w-5 h-5"
-    >
+    <!-- Sun icon (light) -->
+    <svg id="icon-sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5">
       <circle cx="12" cy="12" r="5" fill="currentColor" />
       <line x1="12" y1="1" x2="12" y2="3" stroke="currentColor" />
       <line x1="12" y1="21" x2="12" y2="23" stroke="currentColor" />
@@ -47,6 +39,10 @@ const themes = [
       <line x1="21" y1="12" x2="23" y2="12" stroke="currentColor" />
       <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" stroke="currentColor" />
       <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" stroke="currentColor" />
+    </svg>
+    <!-- Moon icon (dark) -->
+    <svg id="icon-moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5 hidden">
+      <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" fill="currentColor" />
     </svg>
   </div>
 </div>
@@ -71,6 +67,19 @@ const themes = [
       const currentThemeDisplay = document.getElementById('current-theme-display');
       if (currentThemeDisplay) {
         currentThemeDisplay.textContent = theme.charAt(0).toUpperCase() + theme.slice(1);
+      }
+      
+      // Update icons: show sun for light, moon for dark
+      const iconSun = document.getElementById('icon-sun');
+      const iconMoon = document.getElementById('icon-moon');
+      if (iconSun && iconMoon) {
+        if (theme === 'dark') {
+          iconSun.classList.add('hidden');
+          iconMoon.classList.remove('hidden');
+        } else {
+          iconSun.classList.remove('hidden');
+          iconMoon.classList.add('hidden');
+        }
       }
     } catch (error) {
       console.error('Theme setting failed:', error);

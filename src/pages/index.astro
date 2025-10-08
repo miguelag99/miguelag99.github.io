@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import HorizontalCard from "../components/HorizontalCard.astro";
+import LogoWall from "../components/LogoWall.astro";
 import { getCollection } from "astro:content";
 import createSlug from "../lib/createSlug"
 
@@ -26,6 +27,8 @@ const last_posts = posts.slice(0, 3);
         My research interests cover Artificial Intelligence, Vehicle Motion Prediction and Self-Driving Vehicle Architectures.
       </text>
     </div>
+
+    <LogoWall />
 
     <!-- Contact Box -->
     <div class="mt-8 p-6 bg-base-200 rounded-xl shadow-lg">
