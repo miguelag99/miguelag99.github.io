@@ -1,24 +1,8 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import TimeLineElement from "../components/cv/TimeLine.astro";
+import Layout from '../layouts/Layout.astro';
+import TimeLineElement from '../components/TimeLine.astro';
 ---
-<style>
-  /* Add indentation to list items */
-  ul li {
-      padding-left: 1em; /* Adjust the value for more/less indentation */
-      margin-bottom: 0.15cm;
-  }
-  /* Indent for ordered lists */
-  ol li {
-      padding-left: 1em;
-      margin-bottom: 0.15cm;
-  }
-</style>
-
-<BaseLayout title="Resume" sideBarActiveItemID="cv">
-  <div class="mb-5">
-    <div class="text-3xl w-full font-bold">Profile</div>
-  </div>
+<Layout title="Resume" sideBarActiveItemID="cv">
 
   <div class="mb-5">
     <div class="text-3xl w-full font-bold">Education</div>
@@ -39,7 +23,7 @@ import TimeLineElement from "../components/cv/TimeLine.astro";
         </li>
         <li>Thesis with title <i><b>Deep Learning for Unified Perception and Prediction in Autonomous Driving.</i></b></li>
       </ul>
-  </TimeLineElement>
+    </TimeLineElement>
 
     <TimeLineElement
       title="M.Sc. in Telecommunications Engineering"
@@ -113,7 +97,7 @@ import TimeLineElement from "../components/cv/TimeLine.astro";
     <div class="text-3xl w-full font-bold">Certifications</div>
   </div>
 
-  <ul class="list-disc mx-6 mb-10 grid gap-2">
+<ul class="list-disc mx-6 mb-10 grid gap-2">
     <li>
       <a href="https://certificates.trinitycollege.com/4279c030-8a3d-4bd3-aef7-71bc221c90b9#acc.bum8LGOp/" target="_blank">
         English B2 - Trinity College London Integrated Skills in English (ISE II)
@@ -159,15 +143,4 @@ import TimeLineElement from "../components/cv/TimeLine.astro";
         </ul>
     </li>
   </ul>
-
-  <!-- <div class="mb-5">
-    <div class="text-3xl w-full font-bold">Skills</div>
-  </div>
-
-  <ul class="list-disc md:columns-5 columns-2 mx-6">
-    <li>Skill Name</li>
-    <li>Skill Name</li>
-  </ul> -->
-
-
-</BaseLayout>
+</Layout>

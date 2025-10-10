@@ -1,135 +1,130 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
+import Layout from '../layouts/Layout.astro';
 import HorizontalCard from "../components/HorizontalCard.astro";
-import { subjects, theses } from '../content/teaching';
+
+import { getCollection } from 'astro:content';
+
+const undergrad_projects = await getCollection('undergrad_projects');
+const grad_projects = await getCollection('grad_projects');
+const undergrad_subjects = await getCollection('undergrad_subjects');
+const grad_subjects = await getCollection('grad_subjects');
 ---
-
-<BaseLayout title="Teaching" sideBarActiveItemID="teaching">
-  <div class="pb-12 mt-5">
-    <div class="text-5xl font-bold mb-8">Teaching Experience</div>
-
-    <!-- Academic Subjects -->
-    <div class="mb-12">
-      <h2 class="text-3xl font-bold mb-6">Academic Subjects</h2>
-      {subjects.map((subject) => (
-        <div class="bg-base-200 rounded-xl p-6 mb-6 shadow-lg">
-          <div class="flex flex-col md:flex-row gap-4 mb-4">
-            <div class="flex-grow">
-              <h3 class="text-2xl font-bold">
-                <span set:html={subject.name} />
-                <span set:html={subject.icon} />
-              </h3>
-              <p class="text-sm text-base-content/70 mt-1">
-                {subject.role}{subject.coprofessor && ` jointly with `} <span set:html={subject.coprofessor} />
-              </p>
-              <p class="text-sm text-base-content/70">
-                {subject.institution} | {subject.period}
-              </p>
+<Layout sideBarActiveItemID="teaching">
+    <section aria-label="Teaching">
+        <div class="pb-12 mt-5">
+            <!-- Undergraduate -->
+            <!-- Academic Subjects -->
+            <div class="mb-12">
+            <h2 class="text-3xl font-bold pb-5">Undergraduate Academic Subjects</h2>
+            {undergrad_subjects.map((subject) => (
+                <div class="bg-base-200 rounded-xl p-6 mb-6 shadow-lg">
+                <div class="flex flex-col md:flex-row gap-4 mb-4">
+                    <div class="flex-grow">
+                    <h3 class="text-2xl font-bold">{subject.data.title}</h3>
+                    <p class="text-sm text-base-content/70 mt-1">
+                        {subject.data.institution} | {subject.data.period}
+                    </p>
+                    </div>
+                    <div class="flex-shrink-0 mt-2">
+                        <span class="badge badge-accent">{subject.data.status}</span>
+                    </div>
+                </div>
+                <p class="mb-4 text-base-content/80">{subject.data.description}</p>
+                <div class="border-l-2 border-accent pl-4">
+                    <h4 class="font-semibold mb-2">Main Topics:</h4>
+                    <ul class="list-disc list-inside space-y-0">
+                    {subject.data.topics.map((topic) => (
+                        <li class="text-base-content/70">{topic}</li>
+                    ))}
+                    </ul>
+                </div>
+                </div>
+            ))}
             </div>
-            <div class="flex-shrink-0">
-              <span class="badge badge-accent">{subject.level}</span>
+
+            <!-- Projects -->
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold pb-5">Undergraduate Projects</h2>
+                {undergrad_projects.map((project) => (
+                    <div class="bg-base-200 rounded-xl p-6 mb-6 shadow-lg">
+                        <div class="flex flex-col md:flex-row gap-4 mb-4">
+                            <div class="flex-grow">
+                                <h3 class="text-2xl font-bold">{project.data.title}</h3>
+                                <p class="text-sm text-base-content/70 mt-1">
+                                    {project.data.student} | {project.data.period}
+                                </p>
+                            </div>
+                            <div class="flex-shrink-0 mt-2">
+                                <span class="badge badge-accent">{project.data.status}</span>
+                            </div>
+                        </div>
+                        <p class="mb-4 text-base-content/80">{project.data.description}</p>
+                        <div class="border-l-2 border-accent pl-4">
+                            <h4 class="font-semibold mb-2">Main Topics:</h4>
+                            <ul class="list-disc list-inside space-y-0">
+                                {project.data.topics.map((topic) => (
+                                    <li class="text-base-content/70">{topic}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    </div>
+                ))}
             </div>
-          </div>
-          
-          <p class="mb-4 text-base-content/80">{subject.description}</p>
-          
-          <div class="border-l-2 border-accent pl-4">
-            <h4 class="font-semibold mb-2">Main Topics:</h4>
-            <ul class="list-disc list-inside space-y-0">
-              {subject.topics.map((topic) => (
-                <li class="text-base-content/70">{topic}</li>
-              ))}
-            </ul>
-          </div>
+
+            <!-- Graduate -->
+            <div class="mb-12">
+            <h2 class="text-3xl font-bold pb-5">Graduate Academic Subjects</h2>
+            {grad_subjects.map((subject) => (
+                <div class="bg-base-200 rounded-xl p-6 mb-6 shadow-lg">
+                    <div class="flex flex-col md:flex-row gap-4 mb-4">
+                        <div class="flex-grow">
+                            <h3 class="text-2xl font-bold">{subject.data.title}</h3>
+                            <p class="text-sm text-base-content/70 mt-1">
+                                {subject.data.institution} | {subject.data.period}
+                            </p>
+                        </div>
+                        <div class="flex-shrink-0 mt-2">
+                            <span class="badge badge-accent">{subject.data.status}</span>
+                        </div>
+                    </div>
+                    <p class="mb-4 text-base-content/80">{subject.data.description}</p>
+                    <div class="border-l-2 border-accent pl-4">
+                        <h4 class="font-semibold mb-2">Main Topics:</h4>
+                        <ul class="list-disc list-inside space-y-0">
+                            {subject.data.topics.map((topic) => (
+                                <li class="text-base-content/70">{topic}</li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+            ))}
+
+            <h2 class="text-3xl font-bold pb-5 mt-10">Graduate Projects</h2>
+            {grad_projects.map((project) => (
+                <div class="bg-base-200 rounded-xl p-6 mb-6 shadow-lg">
+                    <div class="flex flex-col md:flex-row gap-4 mb-4">
+                        <div class="flex-grow">
+                            <h3 class="text-2xl font-bold">{project.data.title}</h3>
+                            <p class="text-sm text-base-content/70 mt-1">
+                                {project.data.student} | {project.data.period}
+                            </p>
+                        </div>
+                        <div class="flex-shrink-0 mt-2">
+                            <span class="badge badge-accent">{project.data.status}</span>
+                        </div>
+                    </div>
+                    <p class="mb-4 text-base-content/80">{project.data.description}</p>
+                    <div class="border-l-2 border-accent pl-4">
+                        <h4 class="font-semibold mb-2">Main Topics:</h4>
+                        <ul class="list-disc list-inside space-y-0">
+                            {project.data.topics.map((topic) => (
+                                <li class="text-base-content/70">{topic}</li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+            ))}
+
         </div>
-      ))}
-    </div>
-
-    <!-- Thesis Supervision -->
-    <div>
-      <h2 class="text-3xl font-bold mb-6">Thesis Supervision</h2>
-      
-      <!-- Bachelor's Theses -->
-      <div class="bg-base-200 rounded-xl p-6 mb-6 shadow-lg">
-        <h3 class="text-2xl font-bold mb-6">Bachelor's Thesis</h3>
-        <div class="space-y-6">
-          {theses.bachelor.map((thesis) => (
-            <div class="border-b border-base-300 last:border-b-0 pb-6">
-              <div class="flex flex-col md:flex-row gap-4 mb-4">
-                <div class="flex-grow">
-                  <h4 class="text-xl font-bold">{thesis.title}</h4>
-                  <p class="text-sm text-base-content/70 mt-1">
-                    {thesis.student}
-                  </p>
-                  <p class="text-sm text-base-content/70">
-                    {thesis.period}
-                    {thesis.codirector && ` | Jointly with `}
-                    <span set:html={thesis.codirector} />
-                  </p>
-                </div>
-                <div class="flex-shrink-0">
-                  <span class={`badge ${thesis.status === "Completed" ? "badge-success" : "badge-info"}`}>
-                    {thesis.status}
-                    {thesis.grade && ` - Grade: ${thesis.grade}`}
-                  </span>
-                </div>
-              </div>
-              
-              <p class="mb-4 text-base-content/80">{thesis.description}</p>
-              
-              <div class="border-l-2 border-accent pl-4">
-                <h5 class="font-semibold mb-2">Main Topics:</h5>
-                <ul class="list-disc list-inside space-y-0">
-                  {thesis.topics.map((topic) => (
-                    <li class="text-base-content/70">{topic}</li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-      
-      <!-- Master's Theses -->
-      <!-- <div class="bg-base-200 rounded-xl p-6 shadow-lg">
-        <h3 class="text-2xl font-bold mb-6">Master's Thesis</h3>
-        <div class="space-y-6">
-          {theses.master.map((thesis) => (
-            <div class="border-b border-base-300 last:border-b-0 pb-6">
-              <div class="flex flex-col md:flex-row gap-4 mb-4">
-                <div class="flex-grow">
-                  <h4 class="text-xl font-bold">{thesis.title}</h4>
-                  <p class="text-sm text-base-content/70 mt-1">
-                    {thesis.student}
-                  </p>
-                  <p class="text-sm text-base-content/70">
-                    {thesis.period}
-                    {thesis.codirector && ` | Jointly with `}
-                    <span set:html={thesis.codirector} />
-                  </p>
-                </div>
-                <div class="flex-shrink-0">
-                  <span class={`badge ${thesis.status === "Completed" ? "badge-success" : "badge-info"}`}>
-                    {thesis.status}
-                  </span>
-                </div>
-              </div>
-              
-              <p class="mb-4 text-base-content/80">{thesis.description}</p>
-              
-              <div class="border-l-2 border-accent pl-4">
-                <h5 class="font-semibold mb-2">Key Topics:</h5>
-                <ul class="list-disc list-inside space-y-1">
-                  {thesis.topics.map((topic) => (
-                    <li class="text-base-content/70">{topic}</li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div> -->
-
-    </div>
-  </div>
-</BaseLayout>
+    </section>
+</Layout>

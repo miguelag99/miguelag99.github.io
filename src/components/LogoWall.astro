@@ -1,5 +1,7 @@
 ---
-const technologies = [
+type Technology = "git" | "bash" | "docker" | "Visual Studio Code" | "python" | "pytorch" | "Amazon Web Services" | "ROS";
+
+const technologies: Technology[] = [
   "git",
   "bash",
   "docker",
@@ -9,7 +11,8 @@ const technologies = [
   "Amazon Web Services",
   "ROS",
 ];
-const icon_paths = {
+
+const icon_paths: Record<Technology, string> = {
   "git": "https://git-scm.com/images/logos/downloads/Git-Icon-1788C.svg",
   "bash": "https://www.svgrepo.com/show/353478/bash-icon.svg",
   "docker": "https://www.svgrepo.com/show/373557/docker2.svg",
@@ -19,7 +22,7 @@ const icon_paths = {
   "Amazon Web Services": "https://www.svgrepo.com/show/376356/aws.svg",
   "ROS": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Robot_Operating_System_logo.svg/2048px-Robot_Operating_System_logo.svg.png"
 };
-const tool_urls = {
+const tool_urls: Record<Technology, string> = {
   "git": "https://git-scm.com/",
   "bash": "https://www.gnu.org/software/bash/",
   "docker": "https://www.docker.com/",

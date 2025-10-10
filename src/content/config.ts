@@ -1,36 +1,89 @@
-import { z, defineCollection } from "astro:content";
-const blogSchema = z.object({
-    title: z.string(),
-    description: z.string(),
-    pubDate: z.coerce.date(),
-    updatedDate: z.string().optional(),
-    heroImage: z.string().optional(),
-    badge: z.string().optional(),
-    tags: z.array(z.string()).refine(items => new Set(items).size === items.length, {
-        message: 'tags must be unique',
-    }).optional(),
+import { defineCollection, z } from "astro:content";
+import { glob, file } from 'astro/loaders';
+
+const journal_publications = defineCollection({
+    schema: z.object({
+        title: z.string(),
+        journal: z.string(),
+        authors: z.array(z.string()),
+        teaser_url: z.string().url().optional(),
+        paper_url: z.string().url().optional(),
+        date: z.date(),
+    }),
+    loader: glob({ pattern: "**/*.md", base: "src/content/journal_pubs" }),
 });
 
-const storeSchema = z.object({
-    title: z.string(),
-    description: z.string(),
-    custom_link_label: z.string(),
-    custom_link: z.string().optional(),
-    updatedDate: z.coerce.date(),
-    pricing: z.string().optional(),
-    oldPricing: z.string().optional(),
-    badge: z.string().optional(),
-    checkoutUrl: z.string().optional(),
-    heroImage: z.string().optional(),
+const conference_publications = defineCollection({
+    schema: z.object({
+        title: z.string(),
+        conference: z.string(),
+        authors: z.array(z.string()),
+        teaser_url: z.string().url().optional(),
+        paper_url: z.string().url().optional(),
+        date: z.date(),
+    }),
+    loader: glob({ pattern: "**/*.md", base: "src/content/conference_pubs" }),
 });
 
-export type BlogSchema = z.infer<typeof blogSchema>;
-export type StoreSchema = z.infer<typeof storeSchema>;
+const undergrad_projects = defineCollection({
+    schema: z.object({
+        title: z.string(),
+        student: z.string(),
+        period: z.string(),
+        codirector: z.string(),
+        status: z.string(),
+        grade: z.string(),
+        topics: z.array(z.string()),
+        description: z.string(),
+    }),
+    loader: glob({ pattern: "**/*.md", base: "src/content/undergraduate_theses" }),
+});
 
-const blogCollection = defineCollection({ schema: blogSchema });
-const storeCollection = defineCollection({ schema: storeSchema });
+const grad_projects = defineCollection({
+    schema: z.object({
+        title: z.string(),
+        student: z.string(),
+        period: z.string(),
+        codirector: z.string(),
+        status: z.string(),
+        grade: z.string(),
+        topics: z.array(z.string()),
+        description: z.string(),
+    }),
+    loader: glob({ pattern: "**/*.md", base: "src/content/graduate_theses" }),
+});
+
+const undergrad_subjects = defineCollection({
+    schema: z.object({
+        title: z.string(),
+        period: z.string(),
+        institution: z.string(),
+        status: z.string(),
+        link: z.string().url().optional(),
+        topics: z.array(z.string()),
+        description: z.string(),
+    }),
+    loader: glob({ pattern: "**/*.md", base: "src/content/undergraduate_subjects" }),
+});
+
+const grad_subjects = defineCollection({
+    schema: z.object({
+        title: z.string(),
+        period: z.string(),
+        institution: z.string(),
+        status: z.string(),
+        link: z.string().url().optional(),
+        topics: z.array(z.string()),
+        description: z.string(),
+    }),
+    loader: glob({ pattern: "**/*.md", base: "src/content/graduate_subjects" }),
+});
 
 export const collections = {
-    'blog': blogCollection,
-    'store': storeCollection
-}
+    journal_publications,
+    conference_publications,
+    undergrad_projects,
+    grad_projects,
+    undergrad_subjects,
+    grad_subjects
+};
