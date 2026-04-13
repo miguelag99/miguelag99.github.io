@@ -1,5 +1,28 @@
 export const news = [
   {
+    year: 2026,
+    items: [
+      {
+        date: 'April',
+        title: 'New Article Preprint',
+        description: 'We have published a new article preprint titled <strong>BEVPredFormer: Spatio-temporal Attention for BEV Instance Prediction in Autonomous Driving</strong> on arXiv.',
+        link: 'https://arxiv.org/abs/2604.02930',        
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline ml-2 hover:text-accent transition-colors">
+          <path d="M13.213 9.787a3.391 3.391 0 0 0-4.795 0l-3.425 3.426a3.39 3.39 0 0 0 4.795 4.794l.321-.304m-.321-4.49a3.39 3.39 0 0 0 4.795 0l3.424-3.426a3.39 3.39 0 0 0-4.794-4.795l-1.028.961"/>
+        </svg>`
+      },
+      {
+        date: 'March',
+        title: 'Research Internship at Intelligent Vehicles Lab, Hochschule München',
+        description: 'I started my PhD research internship at <a href="https://iv.ee.hm.edu/" style="color: #4f46e5; text-decoration: none;">Intelligent Vehicles Lab, Hochschule München </a>, Germany, under the supervision of <a href="https://www.linkedin.com/in/fabian-flohr-a99031115/" style="color: #4f46e5; text-decoration: none;">Prof. Dr. Fabian Flohr</a>.',
+        link: 'https://www.linkedin.com/posts/miguel-antunes-garcia_im-happy-to-share-that-ive-started-my-predoctoral-activity-7434871882832687104-WmIo?utm_source=share&utm_medium=member_desktop&rcm=ACoAACvfGnkBaSwU-q8MIaBbp7wG4zBRpbyS5bY',
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline ml-2 hover:text-accent transition-colors">
+          <path d="M13.213 9.787a3.391 3.391 0 0 0-4.795 0l-3.425 3.426a3.39 3.39 0 0 0 4.795 4.794l.321-.304m-.321-4.49a3.39 3.39 0 0 0 4.795 0l3.424-3.426a3.39 3.39 0 0 0-4.794-4.795l-1.028.961"/>
+        </svg>`
+      }
+    ]
+  },
+  {
     year: 2025,
     items: [
       {
