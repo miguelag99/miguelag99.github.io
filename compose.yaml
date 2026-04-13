@@ -5,6 +5,8 @@ services:
     user: "0:0"
     volumes:
       - .:/app
+      - node_modules:/app/node_modules
+      - pnpm_store:/pnpm/store
     command:
       - sh
       - -c
@@ -15,7 +17,11 @@ services:
         corepack prepare pnpm@10.33.0 --activate
         pnpm config set store-dir /pnpm/store
         pnpm install --frozen-lockfile
-        pnpm dev --host 0.0.0.0
+        pnpm dev
     network_mode: host
     stdin_open: true
     tty: true
+
+volumes:
+  node_modules:
+  pnpm_store:
