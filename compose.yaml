@@ -1,0 +1,21 @@
+services:
+  web:
+    image: node:20
+    working_dir: /app
+    user: "0:0"
+    volumes:
+      - .:/app
+    command:
+      - sh
+      - -c
+      - |
+        set -e
+        export COREPACK_ENABLE_DOWNLOAD_PROMPT=0
+        corepack enable
+        corepack prepare pnpm@10.33.0 --activate
+        pnpm config set store-dir /pnpm/store
+        pnpm install --frozen-lockfile
+        pnpm dev --host 0.0.0.0
+    network_mode: host
+    stdin_open: true
+    tty: true
