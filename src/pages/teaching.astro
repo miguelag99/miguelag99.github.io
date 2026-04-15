@@ -30,14 +30,6 @@ const grad_subjects = await getCollection('grad_subjects');
                     </div>
                 </div>
                 <p class="mb-4 text-base-content/80">{subject.data.description}</p>
-                <div class="border-l-2 border-accent pl-4">
-                    <h4 class="font-semibold mb-2">Main Topics:</h4>
-                    <ul class="list-disc list-inside space-y-0">
-                    {subject.data.topics.map((topic) => (
-                        <li class="text-base-content/70">{topic}</li>
-                    ))}
-                    </ul>
-                </div>
                 </div>
             ))}
             </div>
@@ -59,14 +51,6 @@ const grad_subjects = await getCollection('grad_subjects');
                             </div>
                         </div>
                         <p class="mb-4 text-base-content/80">{project.data.description}</p>
-                        <div class="border-l-2 border-accent pl-4">
-                            <h4 class="font-semibold mb-2">Main Topics:</h4>
-                            <ul class="list-disc list-inside space-y-0">
-                                {project.data.topics.map((topic) => (
-                                    <li class="text-base-content/70">{topic}</li>
-                                ))}
-                            </ul>
-                        </div>
                     </div>
                 ))}
             </div>
@@ -88,14 +72,6 @@ const grad_subjects = await getCollection('grad_subjects');
                         </div>
                     </div>
                     <p class="mb-4 text-base-content/80">{subject.data.description}</p>
-                    <div class="border-l-2 border-accent pl-4">
-                        <h4 class="font-semibold mb-2">Main Topics:</h4>
-                        <ul class="list-disc list-inside space-y-0">
-                            {subject.data.topics.map((topic) => (
-                                <li class="text-base-content/70">{topic}</li>
-                            ))}
-                        </ul>
-                    </div>
                 </div>
             ))}
 
@@ -114,14 +90,6 @@ const grad_subjects = await getCollection('grad_subjects');
                         </div>
                     </div>
                     <p class="mb-4 text-base-content/80">{project.data.description}</p>
-                    <div class="border-l-2 border-accent pl-4">
-                        <h4 class="font-semibold mb-2">Main Topics:</h4>
-                        <ul class="list-disc list-inside space-y-0">
-                            {project.data.topics.map((topic) => (
-                                <li class="text-base-content/70">{topic}</li>
-                            ))}
-                        </ul>
-                    </div>
                 </div>
             ))}
 

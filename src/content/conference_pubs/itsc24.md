@@ -8,7 +8,7 @@ authors:
     - Rafael Barea
     - Fabio Sánchez-García
     - Angel Llamazares
-teaser_url: https://raw.githubusercontent.com/miguelag99/Efficient-Instance-Prediction/7340c4cc06ffd901f0a2373dfa6b9f223a9a136c/docs/results.png
+# teaser_url: https://raw.githubusercontent.com/miguelag99/Efficient-Instance-Prediction/7340c4cc06ffd901f0a2373dfa6b9f223a9a136c/docs/results.png
 paper_url: https://ieeexplore.ieee.org/abstract/document/10919912
 date: 2024-09-24
 ---

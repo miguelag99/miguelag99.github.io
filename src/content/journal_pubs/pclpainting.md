@@ -7,7 +7,7 @@ authors:
     - Miguel Antunes-García
     - Pedro A. Revenga
     - Luis M. Bergasa
-teaser_url: https://www.mdpi.com/sensors/sensors-24-01244/article_deploy/html/images/sensors-24-01244-g002-550.jpg
+# teaser_url: https://www.mdpi.com/sensors/sensors-24-01244/article_deploy/html/images/sensors-24-01244-g002-550.jpg
 paper_url: https://www.mdpi.com/1424-8220/24/4/1244
 date: 2024-02-13
 ---

@@ -8,7 +8,7 @@ authors:
     - Fabio Sánchez-García
     - Pablo Pardo-Decimavilla
     - Pedro Revenga
-teaser_url: https://github.com/miguelag99/miguelag99.github.io/raw/main/public/publications/robot23_teaser.png
+# teaser_url: https://github.com/miguelag99/miguelag99.github.io/raw/main/public/publications/robot23_teaser.png
 paper_url: https://link.springer.com/chapter/10.1007/978-3-031-58676-7_9
 date: 2023-11-22
 ---

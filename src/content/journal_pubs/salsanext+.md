@@ -8,7 +8,7 @@ authors:
     - Rodrigo Gutiérrez-Moreno
     - Ángel Llamazares Llamazares
     - Luis M. Bergasa
-teaser_url: https://ieeexplore.ieee.org/ielx8/6287639/10820123/10962238/graphical_abstract/access-gagraphic-3559580.jpg
+# teaser_url: https://ieeexplore.ieee.org/ielx8/6287639/10820123/10962238/graphical_abstract/access-gagraphic-3559580.jpg
 paper_url: https://ieeexplore.ieee.org/abstract/document/10962238
 date: 2025-04-10
 ---
