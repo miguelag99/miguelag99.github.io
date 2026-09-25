@@ -9,10 +9,15 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@tailwindcss/typography": "^0.5.19",
-    "@tailwindcss/vite": "^4.1.14",
-    "astro": "^5.14.3",
-    "daisyui": "^5.1.31",
-    "tailwindcss": "^4.1.14"
+    "@tailwindcss/typography": "^0.5.20",
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "^7.3.5",
+    "daisyui": "^5.7.46",
+    "tailwindcss": "^4.3.3"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
   }
 }

@@ -5,7 +5,6 @@ import HorizontalCard from "../components/HorizontalCard.astro";
 import { getCollection } from 'astro:content';
 
 const undergrad_projects = await getCollection('undergrad_projects');
-const grad_projects = await getCollection('grad_projects');
 const undergrad_subjects = await getCollection('undergrad_subjects');
 const grad_subjects = await getCollection('grad_subjects');
 ---
@@ -74,24 +73,7 @@ const grad_subjects = await getCollection('grad_subjects');
                     <p class="mb-4 text-base-content/80">{subject.data.description}</p>
                 </div>
             ))}
-
-            <h2 class="text-3xl font-bold pb-5 mt-10">Graduate Projects</h2>
-            {grad_projects.map((project) => (
-                <div class="bg-base-200 rounded-xl p-6 mb-6 shadow-lg">
-                    <div class="flex flex-col md:flex-row gap-4 mb-4">
-                        <div class="flex-grow">
-                            <h3 class="text-2xl font-bold">{project.data.title}</h3>
-                            <p class="text-sm text-base-content/70 mt-1">
-                                {project.data.student} | {project.data.period}
-                            </p>
-                        </div>
-                        <div class="flex-shrink-0 mt-2">
-                            <span class="badge badge-accent">{project.data.status}</span>
-                        </div>
-                    </div>
-                    <p class="mb-4 text-base-content/80">{project.data.description}</p>
-                </div>
-            ))}
+            </div>
 
         </div>
     </section>
