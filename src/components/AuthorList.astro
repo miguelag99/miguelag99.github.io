@@ -1,0 +1,18 @@
+---
+import { isOwnName } from "../lib/publications";
+
+interface Props {
+  authors: string[];
+}
+
+const { authors } = Astro.props;
+---
+
+{
+  authors.map((author, i) => (
+    <>
+      <span class:list={[isOwnName(author) && "font-bold underline decoration-accent underline-offset-2"]}>{author}</span>
+      {i < authors.length - 1 && ", "}
+    </>
+  ))
+}

@@ -1,0 +1,46 @@
+---
+import { Image } from "astro:assets";
+import AuthorList from "./AuthorList.astro";
+import { publicationUrl, teaserTransitionName, type Publication } from "../lib/publications";
+
+interface Props {
+  publication: Publication;
+}
+
+const { publication } = Astro.props;
+const { id, venue, status, entry } = publication;
+const { title, authors, date, teaser, code_url } = entry.data;
+---
+
+<a
+  href={publicationUrl(id)}
+  class="group block rounded-xl bg-base-200 p-4 mb-4 transition ease-in-out hover:shadow-xl hover:scale-[101%] hover:bg-base-300"
+>
+  <div class="flex flex-col md:flex-row gap-5 items-center">
+    <div class="w-full md:w-52 shrink-0 aspect-[16/9] rounded-lg bg-white overflow-hidden flex items-center justify-center">
+      {
+        teaser ? (
+          <Image
+            src={teaser}
+            width={480}
+            format="webp"
+            alt={`Teaser figure for ${title}`}
+            class="max-h-full w-full object-contain p-1"
+            transition:name={teaserTransitionName(id)}
+          />
+        ) : (
+          <span class="text-neutral-500 text-sm font-semibold px-4 text-center">{venue}</span>
+        )
+      }
+    </div>
+    <div class="grow w-full">
+      <h3 class="text-lg font-bold group-hover:text-accent transition-colors">{title}</h3>
+      <p class="text-sm mt-1"><AuthorList authors={authors} /></p>
+      <p class="text-sm text-base-content/70 italic mt-1">{venue}, {date.getFullYear()}</p>
+      <div class="flex flex-wrap gap-2 mt-2">
+        {status && <span class="badge badge-secondary badge-sm">{status}</span>}
+        {code_url && <span class="badge badge-outline badge-sm">Code</span>}
+      </div>
+    </div>
+  </div>
+</a>

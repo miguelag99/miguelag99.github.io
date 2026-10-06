@@ -1,0 +1,131 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { render } from 'astro:content';
+import { Image, getImage } from 'astro:assets';
+import Layout from '../../layouts/Layout.astro';
+import AuthorList from '../../components/AuthorList.astro';
+import { getPublications, publicationUrl, teaserTransitionName, type Publication } from '../../lib/publications';
+
+export const getStaticPaths = (async () => {
+    const publications = await getPublications();
+    return publications.map((publication, i) => ({
+        params: { id: publication.id },
+        // List is sorted newest first
+        props: { publication, newer: publications[i - 1], older: publications[i + 1] },
+    }));
+}) satisfies GetStaticPaths;
+
+interface Props {
+    publication: Publication;
+    newer?: Publication;
+    older?: Publication;
+}
+
+const { publication, newer, older } = Astro.props;
+const { venue, status, entry } = publication;
+const { title, authors, date, teaser, paper_url, arxiv_url, code_url, project_url, weights_url, doi, bibtex } = entry.data;
+const { Content } = await render(entry);
+
+const ogImage = teaser ? (await getImage({ src: teaser, width: 1200, format: 'jpg' })).src : undefined;
+const description = entry.body?.trim().slice(0, 155).replace(/\s+\S*$/, '') + '…';
+
+const kindLabel = { journal: 'Journal', conference: 'Conference', preprint: 'Preprint' }[publication.kind];
+
+const links = [
+    { label: 'Paper', url: paper_url, primary: true },
+    { label: 'arXiv', url: arxiv_url, primary: !paper_url },
+    { label: 'Code', url: code_url },
+    { label: 'Project page', url: project_url },
+    { label: 'Weights', url: weights_url },
+].filter((link) => link.url);
+---
+<Layout title={`${title} | Miguel Antunes García`} description={description} image={ogImage} ogType="article" sideBarActiveItemID="publications">
+    <article class="pb-12 mt-5">
+        <a href="/publications" class="text-sm text-base-content/70 hover:text-accent transition-colors">&larr; All publications</a>
+
+        <div class="flex flex-wrap gap-2 mt-6 mb-3">
+            <span class="badge badge-accent">{kindLabel}</span>
+            <span class="badge badge-outline">{date.getFullYear()}</span>
+            {status && <span class="badge badge-secondary">{status}</span>}
+        </div>
+
+        <h1 class="text-3xl md:text-4xl font-bold leading-tight">{title}</h1>
+        <p class="text-lg mt-4"><AuthorList authors={authors} /></p>
+        <p class="text-base-content/70 italic mt-2">{venue}</p>
+
+        <div class="flex flex-wrap gap-3 mt-6">
+            {links.map((link) => (
+                <a
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class:list={['btn btn-sm', link.primary ? 'btn-accent' : 'btn-outline']}
+                >
+                    {link.label}
+                </a>
+            ))}
+        </div>
+
+        {teaser && (
+            <figure class="mt-8 mx-auto w-fit max-w-full rounded-xl bg-white p-3 shadow-lg">
+                <Image
+                    src={teaser}
+                    width={Math.min(teaser.width, 1600)}
+                    format="webp"
+                    alt={`Teaser figure for ${title}`}
+                    class="max-w-full h-auto"
+                    transition:name={teaserTransitionName(publication.id)}
+                />
+            </figure>
+        )}
+
+        <h2 class="text-2xl font-bold mt-10 mb-3">Abstract</h2>
+        <div class="text-lg leading-relaxed text-base-content/90 text-justify [&_p]:mb-4">
+            <Content />
+        </div>
+
+        {bibtex && (
+            <>
+                <div class="flex items-center justify-between mt-10 mb-3">
+                    <h2 class="text-2xl font-bold">Citation</h2>
+                    <button type="button" class="btn btn-sm btn-ghost" data-copy-bibtex>Copy BibTeX</button>
+                </div>
+                <pre class="bg-base-300 rounded-xl p-4 text-sm whitespace-pre-wrap break-words"><code data-bibtex>{bibtex.trim()}</code></pre>
+            </>
+        )}
+        {doi && (
+            <p class="text-sm text-base-content/70 mt-3">
+                DOI: <a href={`https://doi.org/${doi}`} target="_blank" rel="noopener noreferrer" class="link link-hover">{doi}</a>
+            </p>
+        )}
+
+        <nav class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-12 pt-6 border-t border-base-300" aria-label="Other publications">
+            {newer ? (
+                <a href={publicationUrl(newer.id)} class="rounded-xl bg-base-200 p-4 hover:bg-base-300 transition-colors">
+                    <span class="text-sm text-base-content/70">&larr; Newer</span>
+                    <span class="block font-semibold mt-1">{newer.entry.data.title}</span>
+                </a>
+            ) : <div class="hidden md:block" />}
+            {older && (
+                <a href={publicationUrl(older.id)} class="rounded-xl bg-base-200 p-4 hover:bg-base-300 transition-colors md:text-right">
+                    <span class="text-sm text-base-content/70">Older &rarr;</span>
+                    <span class="block font-semibold mt-1">{older.entry.data.title}</span>
+                </a>
+            )}
+        </nav>
+    </article>
+</Layout>
+
+<script>
+    // Runs on every client-side navigation, not only on the first load
+    document.addEventListener('astro:page-load', () => {
+        const button = document.querySelector<HTMLButtonElement>('[data-copy-bibtex]');
+        const code = document.querySelector('[data-bibtex]');
+        if (!button || !code) return;
+        button.addEventListener('click', async () => {
+            await navigator.clipboard.writeText(code.textContent ?? '');
+            button.textContent = 'Copied!';
+            setTimeout(() => (button.textContent = 'Copy BibTeX'), 2000);
+        });
+    });
+</script>

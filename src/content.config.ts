@@ -1,29 +1,46 @@
-import { defineCollection } from "astro:content";
+import { defineCollection, type SchemaContext } from "astro:content";
 import { z } from "astro/zod";
 import { glob } from 'astro/loaders';
 
+// Fields shared by every publication type, each one gets its own detail page at /publications/<file name>
+const publicationFields = ({ image }: SchemaContext) => ({
+    title: z.string(),
+    authors: z.array(z.string()),
+    date: z.date(),
+    // Path relative to the .md file, e.g. ../../assets/teasers/paper.png
+    teaser: image().optional(),
+    paper_url: z.url().optional(),
+    arxiv_url: z.url().optional(),
+    code_url: z.url().optional(),
+    project_url: z.url().optional(),
+    weights_url: z.url().optional(),
+    doi: z.string().optional(),
+    bibtex: z.string().optional(),
+});
+
 const journal_publications = defineCollection({
-    schema: z.object({
-        title: z.string(),
+    schema: (ctx) => z.object({
+        ...publicationFields(ctx),
         journal: z.string(),
-        authors: z.array(z.string()),
-        teaser_url: z.url().optional(),
-        paper_url: z.url().optional(),
-        date: z.date(),
     }),
     loader: glob({ pattern: "**/*.md", base: "src/content/journal_pubs" }),
 });
 
 const conference_publications = defineCollection({
-    schema: z.object({
-        title: z.string(),
+    schema: (ctx) => z.object({
+        ...publicationFields(ctx),
         conference: z.string(),
-        authors: z.array(z.string()),
-        teaser_url: z.url().optional(),
-        paper_url: z.url().optional(),
-        date: z.date(),
     }),
     loader: glob({ pattern: "**/*.md", base: "src/content/conference_pubs" }),
+});
+
+const preprints = defineCollection({
+    schema: (ctx) => z.object({
+        ...publicationFields(ctx),
+        venue: z.string().default('arXiv preprint'),
+        status: z.string().optional(),
+    }),
+    loader: glob({ pattern: "**/*.md", base: "src/content/preprints" }),
 });
 
 const undergrad_projects = defineCollection({
@@ -66,6 +83,7 @@ const grad_subjects = defineCollection({
 export const collections = {
     journal_publications,
     conference_publications,
+    preprints,
     undergrad_projects,
     undergrad_subjects,
     grad_subjects
