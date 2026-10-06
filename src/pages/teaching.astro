@@ -3,11 +3,12 @@ import Layout from '../layouts/Layout.astro';
 
 import { getCollection } from 'astro:content';
 
-const undergrad_projects = await getCollection('undergrad_projects');
+// Newest first, periods look like 2025-2026
+const undergrad_projects = (await getCollection('undergrad_projects')).sort((a, b) => b.data.period.localeCompare(a.data.period));
 const undergrad_subjects = await getCollection('undergrad_subjects');
 const grad_subjects = await getCollection('grad_subjects');
 ---
-<Layout sideBarActiveItemID="teaching">
+<Layout title="Teaching | Miguel Antunes García" sideBarActiveItemID="teaching">
     <section aria-label="Teaching">
         <div class="pb-12 mt-5">
             <!-- Undergraduate -->

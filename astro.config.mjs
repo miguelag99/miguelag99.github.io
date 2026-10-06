@@ -5,6 +5,8 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
+  // Used for canonical and social preview (Open Graph) URLs
+  site: 'https://www.miguelantunes.eu',
   vite: {
     plugins: [tailwindcss()],
     server: {

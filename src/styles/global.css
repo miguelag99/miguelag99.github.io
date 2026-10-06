@@ -3,6 +3,15 @@
 @plugin "daisyui" {
   themes: business --default;
 }
+
+/* Inline links in body text, also used inside the HTML strings of news.ts */
+@utility text-link {
+  color: var(--color-accent);
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 .time-line-container>div:last-child .education__time>.education__line {
     display: none;
 }

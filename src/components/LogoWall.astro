@@ -1,70 +1,63 @@
 ---
-type Technology = "git" | "bash" | "docker" | "Visual Studio Code" | "python" | "pytorch" | "Amazon Web Services" | "ROS";
+import type { ImageMetadata } from "astro";
+import gitLogo from "../assets/logos/git.svg";
+import bashLogo from "../assets/logos/bash.svg";
+import dockerLogo from "../assets/logos/docker.svg";
+import vscodeLogo from "../assets/logos/vscode.svg";
+import pythonLogo from "../assets/logos/python.svg";
+import pytorchLogo from "../assets/logos/pytorch.svg";
+import awsLogo from "../assets/logos/aws.svg";
+import rosLogo from "../assets/logos/ros.svg";
+
+interface Technology {
+  name: string;
+  logo: ImageMetadata;
+  url: string;
+}
 
 const technologies: Technology[] = [
-  "git",
-  "bash",
-  "docker",
-  "Visual Studio Code",
-  "python",
-  "pytorch",
-  "Amazon Web Services",
-  "ROS",
+  { name: "Git", logo: gitLogo, url: "https://git-scm.com/" },
+  { name: "Bash", logo: bashLogo, url: "https://www.gnu.org/software/bash/" },
+  { name: "Docker", logo: dockerLogo, url: "https://www.docker.com/" },
+  { name: "Visual Studio Code", logo: vscodeLogo, url: "https://code.visualstudio.com/" },
+  { name: "Python", logo: pythonLogo, url: "https://www.python.org/" },
+  { name: "PyTorch", logo: pytorchLogo, url: "https://pytorch.org/" },
+  { name: "Amazon Web Services", logo: awsLogo, url: "https://aws.amazon.com/" },
+  { name: "ROS", logo: rosLogo, url: "https://www.ros.org/" },
 ];
-
-const icon_paths: Record<Technology, string> = {
-  "git": "https://git-scm.com/images/logos/downloads/Git-Icon-1788C.svg",
-  "bash": "https://www.svgrepo.com/show/353478/bash-icon.svg",
-  "docker": "https://www.svgrepo.com/show/373557/docker2.svg",
-  "Visual Studio Code": "https://www.svgrepo.com/show/354522/visual-studio-code.svg",
-  "python": "https://www.svgrepo.com/show/374016/python.svg",
-  "pytorch": "https://www.svgrepo.com/show/354240/pytorch.svg",
-  "Amazon Web Services": "https://www.svgrepo.com/show/376356/aws.svg",
-  "ROS": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Robot_Operating_System_logo.svg/2048px-Robot_Operating_System_logo.svg.png"
-};
-const tool_urls: Record<Technology, string> = {
-  "git": "https://git-scm.com/",
-  "bash": "https://www.gnu.org/software/bash/",
-  "docker": "https://www.docker.com/",
-  "Visual Studio Code": "https://code.visualstudio.com/",
-  "python": "https://www.python.org/",
-  "pytorch": "https://pytorch.org/",
-  "Amazon Web Services": "https://aws.amazon.com/",
-  "ROS": "https://www.ros.org/"
-};
 ---
 
 <div class="relative overflow-x-hidden py-8">
-  <div
-    class="pointer-events-none absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[var(--background)] to-transparent z-20"
-  >
-  </div>
-  <div
-    class="pointer-events-none absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[var(--background)] to-transparent z-20"
-  >
-  </div>
+  <div class="pointer-events-none absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-base-100 to-transparent z-20"></div>
+  <div class="pointer-events-none absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-base-100 to-transparent z-20"></div>
 
-<div class="flex animate-scroll hover:animate-paused gap-12 md:gap-10 w-max">
+  <div class="flex animate-scroll hover:animate-paused w-max">
     {
-        [...technologies, ...technologies, ...technologies].map((tech) => (
-            <div class="flex items-center gap-2 group transition-all duration-300">
-                <a href={tool_urls[tech]} target="_blank" rel="noopener noreferrer">
-                    <img
-                        src={icon_paths[tech]}
-                        alt={tech}
-                        class="h-7 w-auto object-contain transition-transform group-hover:scale-110 opacity-100"
-                        width="35"
-                        height="35"
-                        loading="lazy"
-                    />
-                </a>
-                <span class="text-lg font-medium text-[var(--white-icon)]">
-                    {tech.charAt(0).toUpperCase() + tech.slice(1)}
-                </span>
-            </div>
+      // Two identical copies (spacing via padding, not gap) so the -50% translation loops seamlessly
+      [0, 1].map((copy) =>
+        technologies.map((tech) => (
+          <a
+            href={tech.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center gap-2 pr-12 group"
+            aria-hidden={copy > 0 ? "true" : undefined}
+            tabindex={copy > 0 ? -1 : undefined}
+          >
+            <img
+              src={tech.logo.src}
+              alt=""
+              class="h-7 w-auto object-contain transition-transform group-hover:scale-110"
+              width="35"
+              height="35"
+              loading="lazy"
+            />
+            <span class="text-lg font-medium text-base-content">{tech.name}</span>
+          </a>
         ))
+      )
     }
-</div>
+  </div>
 </div>
 
 <style is:global>
@@ -77,12 +70,15 @@ const tool_urls: Record<Technology, string> = {
     }
   }
   .animate-scroll {
-    animation: scroll 60s linear infinite;
+    animation: scroll 40s linear infinite;
+  }
+  .hover\:animate-paused:hover {
+    animation-play-state: paused;
   }
 
-  @media (min-width: 768px) {
+  @media (prefers-reduced-motion: reduce) {
     .animate-scroll {
-      animation-duration: 50s;
+      animation: none;
     }
   }
 </style>

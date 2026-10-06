@@ -3,6 +3,8 @@ import Layout from '../layouts/Layout.astro';
 import Introduction from '../content/Introduction.astro';
 import ContactInfo from '../content/ContactInfo.astro';
 import { news } from '../content/news';
+
+const isExternal = (link: string) => /^https?:\/\//.test(link);
 ---
 <Layout sideBarActiveItemID="home">
 
@@ -11,37 +13,37 @@ import { news } from '../content/news';
 
 	<div class="my-8"></div>
 	<!-- News -->
-  	<div class="bg-base-300 rounded-xl p-6 mb-8 shadow-lg">
+  	<section aria-label="Recent news" class="bg-base-300 rounded-xl p-6 mb-8 shadow-lg">
 		<h2 class="text-3xl font-bold mb-6">Recent News</h2>
-		
+
 		{news.map((yearGroup) => (
 		<div class="mb-6">
-			<h3 class="text-2xl font-bold mb-4 border-b border-base-300 pb-2">
+			<h3 class="text-2xl font-bold mb-4 border-b border-base-100 pb-2">
 			{yearGroup.year}
 			</h3>
-			
+
 			<div class="space-y-4">
 			{yearGroup.items.map((item) => (
-				<div class="border-b border-base-300 pb-4 last:border-b-0">
+				<div class="border-b border-base-100 pb-4 last:border-b-0">
 				<div class="flex items-start">
 					<span class="text-sm text-base-content/70 mr-4 min-w-[100px]">
 					{item.date}
 					</span>
 					<div>
 					<h4 class="text-xl font-semibold mb-2">
-						{'link' in item && item.link ? (
-						<a 
-							href={item.link} 
-							class="hover:text-accent transition-colors flex items-center gap-2"
+						{item.link ? (
+						<a
+							href={item.link}
+							class="hover:text-accent transition-colors inline-flex items-center gap-2"
+							{...(isExternal(item.link) && { target: '_blank', rel: 'noopener noreferrer' })}
 						>
-							<span set:html={item.title} />
-							{'icon' in item && item.icon && <span set:html={item.icon} />}
+							{item.title}
+							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0" aria-hidden="true">
+								<path d="M13.213 9.787a3.391 3.391 0 0 0-4.795 0l-3.425 3.426a3.39 3.39 0 0 0 4.795 4.794l.321-.304m-.321-4.49a3.39 3.39 0 0 0 4.795 0l3.424-3.426a3.39 3.39 0 0 0-4.794-4.795l-1.028.961"/>
+							</svg>
 						</a>
 						) : (
-						<div class="flex items-center gap-2">
-							<span set:html={item.title} />
-							{'icon' in item && item.icon && <span set:html={item.icon} />}
-						</div>
+						item.title
 						)}
 					</h4>
 					<p class="text-base-content/80" set:html={item.description}></p>
@@ -52,6 +54,6 @@ import { news } from '../content/news';
 			</div>
 		</div>
 		))}
-	</div>
+	</section>
 
 </Layout>
