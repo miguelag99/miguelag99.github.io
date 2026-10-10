@@ -9,74 +9,37 @@ const undergrad_projects = (await getCollection('undergrad_projects')).sort((a, 
 const undergrad_subjects = await getCollection('undergrad_subjects');
 const grad_subjects = await getCollection('grad_subjects');
 const stagger = createStagger();
+
+const sections = [
+    {
+        heading: 'Undergraduate Academic Subjects',
+        items: undergrad_subjects.map(({ data }) => ({ ...data, meta: `${data.institution} | ${data.period}` })),
+    },
+    {
+        heading: 'Undergraduate Projects',
+        items: undergrad_projects.map(({ data }) => ({ ...data, meta: `${data.student} | ${data.period}` })),
+    },
+    {
+        heading: 'Graduate Academic Subjects',
+        items: grad_subjects.map(({ data }) => ({ ...data, meta: `${data.institution} | ${data.period}` })),
+    },
+];
 ---
 <Layout title="Teaching | Miguel Antunes García" sideBarActiveItemID="teaching">
     <section aria-label="Teaching">
         <div class="pb-12 mt-5">
-            <!-- Undergraduate -->
-            <!-- Academic Subjects -->
-            <div class="mb-12">
-            <h2 class:list={["text-3xl font-bold pb-5", stagger()]}>Undergraduate Academic Subjects</h2>
-            {undergrad_subjects.map((subject) => (
-                <div class:list={["bg-base-200 rounded-xl p-6 mb-6 shadow-lg", stagger()]}>
-                <div class="flex flex-col md:flex-row gap-4 mb-4">
-                    <div class="flex-grow">
-                    <h3 class="text-2xl font-bold">{subject.data.title}</h3>
-                    <p class="text-sm text-base-content/70 mt-1">
-                        {subject.data.institution} | {subject.data.period}
-                    </p>
-                    </div>
-                    <div class="flex-shrink-0 mt-2">
-                        <span class="badge badge-accent">{subject.data.status}</span>
-                    </div>
-                </div>
-                <p class="mb-4 text-base-content/80">{subject.data.description}</p>
+            {sections.map((section) => (
+                <div class="mb-10">
+                    <h2 class:list={["text-3xl font-bold pb-5", stagger()]}>{section.heading}</h2>
+                    {section.items.map((item) => (
+                        <div class:list={["bg-base-200 rounded-xl p-4 mb-4", stagger()]}>
+                            <h3 class="text-lg font-bold">{item.title}</h3>
+                            <p class="text-sm text-base-content/70 italic mt-1">{item.meta}</p>
+                            <p class="text-sm text-base-content/80 mt-2">{item.description}</p>
+                        </div>
+                    ))}
                 </div>
             ))}
-            </div>
-
-            <!-- Projects -->
-            <div class="mb-12">
-                <h2 class:list={["text-3xl font-bold pb-5", stagger()]}>Undergraduate Projects</h2>
-                {undergrad_projects.map((project) => (
-                    <div class:list={["bg-base-200 rounded-xl p-6 mb-6 shadow-lg", stagger()]}>
-                        <div class="flex flex-col md:flex-row gap-4 mb-4">
-                            <div class="flex-grow">
-                                <h3 class="text-2xl font-bold">{project.data.title}</h3>
-                                <p class="text-sm text-base-content/70 mt-1">
-                                    {project.data.student} | {project.data.period}
-                                </p>
-                            </div>
-                            <div class="flex-shrink-0 mt-2">
-                                <span class="badge badge-accent">{project.data.status}</span>
-                            </div>
-                        </div>
-                        <p class="mb-4 text-base-content/80">{project.data.description}</p>
-                    </div>
-                ))}
-            </div>
-
-            <!-- Graduate -->
-            <div class="mb-12">
-            <h2 class:list={["text-3xl font-bold pb-5", stagger()]}>Graduate Academic Subjects</h2>
-            {grad_subjects.map((subject) => (
-                <div class:list={["bg-base-200 rounded-xl p-6 mb-6 shadow-lg", stagger()]}>
-                    <div class="flex flex-col md:flex-row gap-4 mb-4">
-                        <div class="flex-grow">
-                            <h3 class="text-2xl font-bold">{subject.data.title}</h3>
-                            <p class="text-sm text-base-content/70 mt-1">
-                                {subject.data.institution} | {subject.data.period}
-                            </p>
-                        </div>
-                        <div class="flex-shrink-0 mt-2">
-                            <span class="badge badge-accent">{subject.data.status}</span>
-                        </div>
-                    </div>
-                    <p class="mb-4 text-base-content/80">{subject.data.description}</p>
-                </div>
-            ))}
-            </div>
-
         </div>
     </section>
 </Layout>
