@@ -2,11 +2,13 @@
 import Layout from '../layouts/Layout.astro';
 
 import { getCollection } from 'astro:content';
+import { createStagger } from '../lib/animations';
 
 // Newest first, periods look like 2025-2026
 const undergrad_projects = (await getCollection('undergrad_projects')).sort((a, b) => b.data.period.localeCompare(a.data.period));
 const undergrad_subjects = await getCollection('undergrad_subjects');
 const grad_subjects = await getCollection('grad_subjects');
+const stagger = createStagger();
 ---
 <Layout title="Teaching | Miguel Antunes García" sideBarActiveItemID="teaching">
     <section aria-label="Teaching">
@@ -14,9 +16,9 @@ const grad_subjects = await getCollection('grad_subjects');
             <!-- Undergraduate -->
             <!-- Academic Subjects -->
             <div class="mb-12">
-            <h2 class="text-3xl font-bold pb-5">Undergraduate Academic Subjects</h2>
+            <h2 class:list={["text-3xl font-bold pb-5", stagger()]}>Undergraduate Academic Subjects</h2>
             {undergrad_subjects.map((subject) => (
-                <div class="bg-base-200 rounded-xl p-6 mb-6 shadow-lg">
+                <div class:list={["bg-base-200 rounded-xl p-6 mb-6 shadow-lg", stagger()]}>
                 <div class="flex flex-col md:flex-row gap-4 mb-4">
                     <div class="flex-grow">
                     <h3 class="text-2xl font-bold">{subject.data.title}</h3>
@@ -35,9 +37,9 @@ const grad_subjects = await getCollection('grad_subjects');
 
             <!-- Projects -->
             <div class="mb-12">
-                <h2 class="text-3xl font-bold pb-5">Undergraduate Projects</h2>
+                <h2 class:list={["text-3xl font-bold pb-5", stagger()]}>Undergraduate Projects</h2>
                 {undergrad_projects.map((project) => (
-                    <div class="bg-base-200 rounded-xl p-6 mb-6 shadow-lg">
+                    <div class:list={["bg-base-200 rounded-xl p-6 mb-6 shadow-lg", stagger()]}>
                         <div class="flex flex-col md:flex-row gap-4 mb-4">
                             <div class="flex-grow">
                                 <h3 class="text-2xl font-bold">{project.data.title}</h3>
@@ -56,9 +58,9 @@ const grad_subjects = await getCollection('grad_subjects');
 
             <!-- Graduate -->
             <div class="mb-12">
-            <h2 class="text-3xl font-bold pb-5">Graduate Academic Subjects</h2>
+            <h2 class:list={["text-3xl font-bold pb-5", stagger()]}>Graduate Academic Subjects</h2>
             {grad_subjects.map((subject) => (
-                <div class="bg-base-200 rounded-xl p-6 mb-6 shadow-lg">
+                <div class:list={["bg-base-200 rounded-xl p-6 mb-6 shadow-lg", stagger()]}>
                     <div class="flex flex-col md:flex-row gap-4 mb-4">
                         <div class="flex-grow">
                             <h3 class="text-2xl font-bold">{subject.data.title}</h3>

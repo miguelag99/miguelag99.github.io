@@ -1,7 +1,21 @@
 @import "tailwindcss";
+@import "tailwind-animations";
 @plugin "@tailwindcss/typography";
 @plugin "daisyui" {
   themes: business --default;
+}
+
+/* Entrance animation: the library's fade-in and slide-in-bottom in one, since two animate-* classes
+   can't be combined on an element. Stagger with the library's animate-delay-* classes */
+@theme {
+  --animate-fade-in-up: fade-in-up 0.5s ease-out both;
+
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      translate: 0 1rem;
+    }
+  }
 }
 
 /* Inline links in body text, also used inside the HTML strings of news.ts */

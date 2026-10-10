@@ -22,9 +22,6 @@ export const isOwnName = (author: string) => OWN_NAME.test(author);
 
 export const publicationUrl = (id: string) => `/publications/${id}`;
 
-// Shared by the list card and the detail page so the teaser morphs between them on navigation
-export const teaserTransitionName = (id: string) => `teaser-${id}`;
-
 const byDateDesc = (a: Publication, b: Publication) =>
     b.entry.data.date.getTime() - a.entry.data.date.getTime();
 

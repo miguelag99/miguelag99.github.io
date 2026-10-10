@@ -1,15 +1,18 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import TimeLineElement from '../components/TimeLine.astro';
+import { createStagger } from '../lib/animations';
+
+const stagger = createStagger();
 ---
 <Layout title="CV | Miguel Antunes García" sideBarActiveItemID="cv">
 
-  <div class="mb-5">
+  <div class:list={["mb-5", stagger()]}>
     <div class="text-3xl w-full font-bold">Education</div>
   </div>
 
   <!-- Education -->
-  <div class="time-line-container grid gap-5 mb-10">
+  <div class:list={["time-line-container grid gap-5 mb-10", stagger()]}>
 
     <TimeLineElement
       title="Ph.D. in Advanced Electronics and Intelligent Systems"
@@ -44,12 +47,12 @@ import TimeLineElement from '../components/TimeLine.astro';
 
   </div>
 
-  <div class="mb-5">
+  <div class:list={["mb-5", stagger()]}>
     <div class="text-3xl w-full font-bold">Experience</div>
   </div>
 
   <!-- Experience -->
-  <div class="time-line-container grid gap-5 mb-10">
+  <div class:list={["time-line-container grid gap-5 mb-10", stagger()]}>
 
     <TimeLineElement
       title="Predoctoral Researcher"
@@ -96,11 +99,11 @@ import TimeLineElement from '../components/TimeLine.astro';
 
   </div>
 
-  <div class="mb-5">
+  <div class:list={["mb-5", stagger()]}>
     <div class="text-3xl w-full font-bold">Certifications</div>
   </div>
 
-<ul class="list-disc mx-6 mb-10 grid gap-2">
+<ul class:list={["list-disc mx-6 mb-10 grid gap-2", stagger()]}>
     <li>
       <a href="https://certificates.trinitycollege.com/4279c030-8a3d-4bd3-aef7-71bc221c90b9#acc.bum8LGOp/" target="_blank" rel="noopener noreferrer" class="text-link">
         English B2 - Trinity College London Integrated Skills in English (ISE II)
