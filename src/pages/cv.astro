@@ -4,6 +4,49 @@ import TimeLineElement from '../components/TimeLine.astro';
 import { createStagger } from '../lib/animations';
 
 const stagger = createStagger();
+
+interface Certification {
+  title: string;
+  issuer: string;
+  url: string;
+  // Individual course certificates of a specialization, shown as badges in a full-width card
+  courses?: { title: string; url: string }[];
+}
+
+const certifications: Certification[] = [
+  {
+    title: 'AI Engineer Core Track: LLM Engineering, RAG, QLoRA, Agents',
+    issuer: 'Udemy',
+    url: 'https://www.udemy.com/certificate/UC-721a921b-8a65-4cb1-90e6-0b80bf1b05ba/',
+  },
+  {
+    title: 'English B2 - Integrated Skills in English (ISE II)',
+    issuer: 'Trinity College London',
+    url: 'https://certificates.trinitycollege.com/4279c030-8a3d-4bd3-aef7-71bc221c90b9#acc.bum8LGOp/',
+  },
+  {
+    title: 'PyTorch for Deep Learning Bootcamp',
+    issuer: 'Udemy',
+    url: 'https://www.udemy.com/certificate/UC-98e5829d-5b08-47a5-8a8d-83f4ab87b43f/',
+  },
+  {
+    title: 'AWS Educate Introduction to Cloud 101',
+    issuer: 'Amazon Web Services',
+    url: 'https://www.credly.com/badges/64a57f33-9206-47f5-b475-102a1c75cbde?source=linked_in_profile',
+  },
+  {
+    title: 'Deep Learning Specialization',
+    issuer: 'Coursera',
+    url: 'https://www.coursera.org/account/accomplishments/specialization/NZDFB6XZ5JBQ',
+    courses: [
+      { title: 'Convolutional Neural Networks', url: 'https://www.coursera.org/account/accomplishments/verify/76KE486TD96P' },
+      { title: 'Sequence Models', url: 'https://www.coursera.org/account/accomplishments/verify/C5XQXDRVV2X7' },
+      { title: 'Improving Deep Neural Networks: Hyperparameter Tuning, Regularization and Optimization', url: 'https://www.coursera.org/account/accomplishments/verify/AG92H89GH2DZ' },
+      { title: 'Neural Networks and Deep Learning', url: 'https://www.coursera.org/account/accomplishments/verify/FATPV3RVDFBD' },
+      { title: 'Structuring Machine Learning Projects', url: 'https://www.coursera.org/account/accomplishments/verify/WY6DAPUDXBKA' },
+    ],
+  },
+];
 ---
 <Layout title="CV | Miguel Antunes García" sideBarActiveItemID="cv">
 
@@ -103,55 +146,32 @@ const stagger = createStagger();
     <div class="text-3xl w-full font-bold">Certifications</div>
   </div>
 
-<ul class:list={["list-disc mx-6 mb-10 grid gap-2", stagger()]}>
-    <li>
-      <a href="https://www.udemy.com/certificate/UC-721a921b-8a65-4cb1-90e6-0b80bf1b05ba/" target="_blank" rel="noopener noreferrer" class="text-link">
-        AI Engineer Core Track: LLM Engineering, RAG, QLoRA, Agents - Udemy
-      </a>
-    </li>
-    <li>
-      <a href="https://certificates.trinitycollege.com/4279c030-8a3d-4bd3-aef7-71bc221c90b9#acc.bum8LGOp/" target="_blank" rel="noopener noreferrer" class="text-link">
-        English B2 - Trinity College London Integrated Skills in English (ISE II)
-      </a>
-    </li>
-    <li>
-      <a href="https://www.udemy.com/certificate/UC-98e5829d-5b08-47a5-8a8d-83f4ab87b43f/" target="_blank" rel="noopener noreferrer" class="text-link">
-        PyTorch for Deep Learning Bootcamp - Udemy
-      </a>
-    </li>
-
-    <li>
-      <a href="https://www.credly.com/badges/64a57f33-9206-47f5-b475-102a1c75cbde?source=linked_in_profile" target="_blank" rel="noopener noreferrer" class="text-link">
-        AWS Educate Introduction to Cloud 101
-      </a>
-    </li>
-
-    <li>
-      <a href="https://www.coursera.org/account/accomplishments/specialization/NZDFB6XZ5JBQ" target="_blank" rel="noopener noreferrer" class="text-link">
-        Coursera Specialized Program - Deep Learning</a>
-        <ul class="list-disc mx-6 mb-10 grid gap-2">
-          <li style="margin-top: 0.5cm;">
-            <a href="https://www.coursera.org/account/accomplishments/verify/76KE486TD96P" target="_blank" rel="noopener noreferrer" class="text-link">
-              Convolutional Neural Networks</a>
-          </li> 
-          <li>
-            <a href="https://www.coursera.org/account/accomplishments/verify/C5XQXDRVV2X7" target="_blank" rel="noopener noreferrer" class="text-link">
-              Sequence Models</a>
-          </li>
-          <li>
-            <a href="https://www.coursera.org/account/accomplishments/verify/AG92H89GH2DZ" target="_blank" rel="noopener noreferrer" class="text-link">
-              Improving Deep Neural Networks: Hyperparameter Tuning, Regularization and Optimization</a>
-          </li>
-          <li>
-            <a href="https://www.coursera.org/account/accomplishments/verify/FATPV3RVDFBD" target="_blank" rel="noopener noreferrer" class="text-link">
-              Neural Networks and Deep Learning</a>
-          </li>
-          <li>
-            <a href="https://www.coursera.org/account/accomplishments/verify/WY6DAPUDXBKA" target="_blank" rel="noopener noreferrer" class="text-link">
-              Structuring Machine Learning Projects
-            </a>
-          </li>
-        </ul>
-    </li>
+  <ul class="grid gap-4 md:grid-cols-2 mb-10">
+    {certifications.map((certification) => (
+      <li class:list={[certification.courses && "md:col-span-2", stagger()]}>
+        <div class="h-full rounded-xl bg-base-200 transition ease-in-out hover:shadow-xl hover:bg-base-300">
+          <a href={certification.url} target="_blank" rel="noopener noreferrer" class="group flex items-start gap-3 p-4">
+            <div class="grow">
+              <p class="text-xs font-semibold uppercase tracking-wide text-accent">{certification.issuer}</p>
+              <h3 class="font-semibold mt-1 group-hover:text-accent transition-colors">{certification.title}</h3>
+            </div>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" class="size-5 shrink-0 mt-1 text-base-content/50 transition group-hover:text-accent group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
+            </svg>
+          </a>
+          {certification.courses && (
+            <ul class="flex flex-wrap gap-2 px-4 pb-4">
+              {certification.courses.map((course) => (
+                <li>
+                  <a href={course.url} target="_blank" rel="noopener noreferrer" class="badge badge-outline h-auto py-1 text-left transition-colors hover:border-accent hover:text-accent">
+                    {course.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </li>
+    ))}
   </ul>
 </Layout>
