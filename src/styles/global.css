@@ -26,6 +26,64 @@
   }
 }
 
+/* Soft accent glows that give the flat dark theme some depth: one at the top and one at
+   the bottom of the page content, each with a dot grid, and one behind the sidebar avatar.
+   They scroll with the content */
+@utility page-glow {
+  background-image:
+    radial-gradient(
+      ellipse 55rem 24rem at 50% -4rem,
+      color-mix(in oklab, var(--color-accent) 14%, transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 55rem 24rem at 50% calc(100% + 4rem),
+      color-mix(in oklab, var(--color-accent) 14%, transparent),
+      transparent 70%
+    );
+  background-repeat: no-repeat;
+
+  /* Faint dot grids over the glows, fading out towards the middle of the page and the sides */
+  position: relative;
+  isolation: isolate;
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 30rem;
+    max-height: 50%;
+    z-index: -1;
+    pointer-events: none;
+    background-image: radial-gradient(
+      circle,
+      color-mix(in oklab, var(--color-base-content) 22%, transparent) 1px,
+      transparent 1.5px
+    );
+    background-size: 1.5rem 1.5rem;
+  }
+  &::before {
+    top: 0;
+    background-position: center top;
+    mask-image: radial-gradient(ellipse 50rem 28rem at 50% 0, #000, transparent 75%);
+  }
+  &::after {
+    bottom: 0;
+    background-position: center bottom;
+    mask-image: radial-gradient(ellipse 50rem 28rem at 50% 100%, #000, transparent 75%);
+  }
+}
+
+@utility sidebar-glow {
+  background-image: radial-gradient(
+    circle 12rem at 50% 5.5rem,
+    color-mix(in oklab, var(--color-accent) 16%, transparent),
+    transparent 70%
+  );
+  background-repeat: no-repeat;
+}
+
 /* Round icon buttons for the social links in the sidebar footer */
 @utility social-link {
   display: grid;
