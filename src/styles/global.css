@@ -26,6 +26,29 @@
   }
 }
 
+/* Round icon buttons for the social links in the sidebar footer */
+@utility social-link {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 9999px;
+  background-color: var(--color-base-300);
+  border: 1px solid color-mix(in oklab, var(--color-base-content) 10%, transparent);
+  color: color-mix(in oklab, var(--color-base-content) 70%, transparent);
+  transition: color 0.2s, border-color 0.2s, translate 0.2s, box-shadow 0.2s;
+  &:hover {
+    color: var(--color-accent);
+    border-color: color-mix(in oklab, var(--color-accent) 60%, transparent);
+    translate: 0 -2px;
+    box-shadow: 0 6px 16px -6px color-mix(in oklab, var(--color-accent) 50%, transparent);
+  }
+  &:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+}
+
 .time-line-container>div:last-child .education__time>.education__line {
     display: none;
 }
